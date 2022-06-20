@@ -8,7 +8,7 @@ import org.junit.Test;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Arrays;
-
+import java.io.IOException;
 
 
 public class TableTest 
@@ -29,6 +29,20 @@ public class TableTest
                                                   Arrays.asList("(<d=81S","3xs=^Cb"));
         table.loadTableFromFile(path);
         assertEquals(mlist, table.getTableContents());
+    }
+
+    @Test (expected = IOException.class)
+    public void saveTableToFile_IOException() throws IOException{
+        String path = "";
+        table.saveTableToFile("", table.getTableContents());
+    } 
+
+    @Test
+    public void saveTableToFile_Successful() throws IOException{
+        String path = "/Users/MSI/Downloads/file1.txt";
+        List<List<String>> mlist =  Arrays.asList(Arrays.asList("MEk=e^z","m!?=W^*"),
+                                                  Arrays.asList("(<d=81S","3xs=^Cb"));
+        assertTrue(table.saveTableToFile(path, mlist));
     }
 
 }

@@ -47,5 +47,25 @@ public class Table
         setTableContents(contents);
     }
 
+    public boolean saveTableToFile(String path, List<List<String>> table) throws IOException{
+        List<String> rowInTable;
+            BufferedWriter outputWriter = new BufferedWriter(new FileWriter(path));
+            for (int i = 0; i < table.size(); i++) {
+                rowInTable = new ArrayList<>();
+                rowInTable = table.get(i);
+                for (int j = 0; j < rowInTable.size(); j++) {
+                    if (j == rowInTable.size() - 1) {
+                        outputWriter.write(rowInTable.get(j));
+                    } else {
+                        outputWriter.write(rowInTable.get(j) + ",");
+                    }
+                }
+                outputWriter.newLine();
+            }
+            outputWriter.flush();
+            outputWriter.close();
+            return true;
+    }
+
 
 }
