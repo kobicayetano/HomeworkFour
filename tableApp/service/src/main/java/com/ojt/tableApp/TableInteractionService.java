@@ -48,7 +48,7 @@ class TableInteractionService{
         System.out.print(output);
  	}
 
- 	public String editTableContent(int row, int col, String keyOrValue, String newValue) throws IOException{
+ 	public String editTableContent(int row, int col, String keyOrValue, String newValue) throws IOException, IndexOutOfBoundsException{
         List<List<String>> myList = table.getTableContents();
         String[] indexData;
         indexData = StringUtils.split(myList.get(row).get(col), "=");
@@ -111,13 +111,10 @@ class TableInteractionService{
                 }
             }
         }
-        for(String s : output){
-            System.out.println(s);
-        }
         return output;
     }
 
-    public String addTableContent(int row, String keyAndValue) throws IOException{
+    public String addTableContent(int row, String keyAndValue) throws IOException, IndexOutOfBoundsException{
     	
     	List<List<String>> myList = table.getTableContents();
     	myList.get(row).add(keyAndValue);
@@ -138,15 +135,13 @@ class TableInteractionService{
                     }
                     table.saveTableToFile(table.getTableFileName(), myList);
                     table.setTableContents(myList);
-                    //System.out.println("Table sorted in ascending order.");
                     break;
             case "D":
             	for (List<String> rowInTable : myList) {
                         Collections.sort(rowInTable, Collections.reverseOrder());
                     }
                     table.saveTableToFile(table.getTableFileName(), myList);
-                    table.setTableContents(myList);
-                    //System.out.println("Table sorted in descending order.");
+                    table.setTableContents(myList);                   
                     break;
             default:
             	System.out.print("No changes made");

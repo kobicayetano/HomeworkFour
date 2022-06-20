@@ -51,6 +51,8 @@ public class TableInteractionServiceTest{
         assertEquals(expected, outContent.toString());
     }
 
+
+
     @Test 
     public void editTableContent_EditKey(){
     	try{
@@ -61,7 +63,10 @@ public class TableInteractionServiceTest{
     	assertEquals(table.getTableContents().get(0).get(0), output);
     	}catch(IOException IOE){
 			System.out.print(IOE);
-		}
+		}catch (IndexOutOfBoundsException IOBE){
+        System.out.print(IOBE);
+      }
+
     }
 
     @Test 
@@ -74,7 +79,10 @@ public class TableInteractionServiceTest{
     	assertEquals(table.getTableContents().get(0).get(0), output);
     	}catch(IOException IOE){
 			System.out.print(IOE);
-		}
+		}catch (IndexOutOfBoundsException IOBE){
+        System.out.print(IOBE);
+      }
+
     }
 
     @Test 
@@ -87,7 +95,20 @@ public class TableInteractionServiceTest{
     	assertEquals("No changes made.", output);
     	}catch(IOException IOE){
 			System.out.print(IOE);
-		}
+		}catch (IndexOutOfBoundsException IOBE){
+        System.out.print(IOBE);
+      }
+
+    }
+
+
+    @Test (expected = IndexOutOfBoundsException.class)
+    public void editTableContent_OutOfBounds() throws IndexOutOfBoundsException, IOException{
+      
+      List<List<String>> myList =  Arrays.asList(Arrays.asList("aaa=aaa","aaa=aaa"),
+                                                  Arrays.asList("bbb=bbb","bbb=bbb"));
+      table.setTableContents(myList);
+      String output = tis.editTableContent(3,3,"aaa","111");
     }
 
     @Test 
@@ -109,9 +130,19 @@ public class TableInteractionServiceTest{
     	assertEquals("AAA=BBB", output);
     	}catch(IOException IOE){
 			System.out.print(IOE);
-		}
+		  }catch (IndexOutOfBoundsException IOBE){
+        System.out.print(IOBE);
+      }
 
     }
+
+    @Test (expected = IndexOutOfBoundsException.class)
+    public void addTable_OutOfBounds() throws IndexOutOfBoundsException, IOException{
+      tis.populateTableContents(2,2);
+      String output = tis.addTableContent(4, "AAA=BBB");
+    }
+
+
 
    @Test
    public void sortTableContent_Ascending(){
