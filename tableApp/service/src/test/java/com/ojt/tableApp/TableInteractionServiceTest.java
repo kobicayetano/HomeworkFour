@@ -41,7 +41,12 @@ public class TableInteractionServiceTest{
         tis.printTableContents(myList);
 
         assertEquals(expected, outContent.toString());
-        
+    }
+
+    @Test 
+    public void editTableContent_EditKey(){
+    	String output = tis.editTableContent(0,0,"KEY","111");
+    	assertEquals(table.getTableContents().get(0).get(0), output);
     }
 
 

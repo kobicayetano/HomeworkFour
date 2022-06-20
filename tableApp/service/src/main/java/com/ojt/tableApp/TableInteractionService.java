@@ -45,4 +45,26 @@ class TableInteractionService{
         System.out.print(output);
  	}
 
+ 	public String editTableContent(int row, int col, String keyOrValue, String newValue){
+        List<List<String>> myList = table.getTableContents();
+        String[] indexData;
+        indexData = StringUtils.split(myList.get(row).get(col), "=");
+        String returnValue;
+        if(StringUtils.equals("KEY", keyOrValue)){
+            indexData[0] = newValue;
+            myList.get(row).set(col, indexData[0] + "=" + indexData[1]);
+            table.setTableContents(myList);
+            returnValue = table.getTableContents().get(row).get(col);
+        }else if(StringUtils.equals("VALUE", keyOrValue)){
+            indexData[1] = newValue;
+            myList.get(row).set(col, indexData[0] + "=" + indexData[1]);
+            table.setTableContents(myList);
+            returnValue = table.getTableContents().get(row).get(col);
+        }else{
+            return "No changes made.";
+        }
+
+        return returnValue;
+    }
+
 }
