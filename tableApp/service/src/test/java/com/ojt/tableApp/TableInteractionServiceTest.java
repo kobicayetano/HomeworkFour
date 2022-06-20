@@ -3,6 +3,7 @@ package com.ojt.tableApp;
 import java.util.List;
 import java.util.Arrays;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.io.ByteArrayOutputStream;
 import java.io.*;
 import static org.junit.Assert.*;
@@ -15,17 +16,24 @@ public class TableInteractionServiceTest{
 
 	@Test
 	public void populateTableContents_ShouldHaveSameValue(){
-
+		try{
 		List<List<String>> actual = tis.populateTableContents(4,5);
 		assertEquals(table.getTableContents(), actual);
+		}catch(IOException IOE){
+			System.out.print(IOE);
+		}
 
 	}	
 
 	@Test
 	public void populateTableContents_ShouldHaveSize4And5(){
+		try{
 		tis.populateTableContents(4,5);
 		assertEquals(table.getTableContents().size(), 4);
 		assertEquals(table.getTableContents().get(0).size(), 5);
+		}catch(IOException IOE){
+			System.out.print(IOE);
+		}
 	}
 
 	@Test
@@ -45,11 +53,65 @@ public class TableInteractionServiceTest{
 
     @Test 
     public void editTableContent_EditKey(){
+    	try{
+    	List<List<String>> myList =  Arrays.asList(Arrays.asList("aaa=aaa","aaa=aaa"),
+                                                  Arrays.asList("bbb=bbb","bbb=bbb"));
+    	table.setTableContents(myList);
     	String output = tis.editTableContent(0,0,"KEY","111");
     	assertEquals(table.getTableContents().get(0).get(0), output);
+    	}catch(IOException IOE){
+			System.out.print(IOE);
+		}
     }
 
+    @Test 
+    public void editTableContent_EditValue(){
+    	try{
+    	List<List<String>> myList =  Arrays.asList(Arrays.asList("aaa=aaa","aaa=aaa"),
+                                                  Arrays.asList("bbb=bbb","bbb=bbb"));
+    	table.setTableContents(myList);
+    	String output = tis.editTableContent(0,0,"KEY","111");
+    	assertEquals(table.getTableContents().get(0).get(0), output);
+    	}catch(IOException IOE){
+			System.out.print(IOE);
+		}
+    }
 
+    @Test 
+    public void editTableContent_NotKeyOrValue(){
+    	try{
+    	List<List<String>> myList =  Arrays.asList(Arrays.asList("aaa=aaa","aaa=aaa"),
+                                                  Arrays.asList("bbb=bbb","bbb=bbb"));
+    	table.setTableContents(myList);
+    	String output = tis.editTableContent(0,0,"aaa","111");
+    	assertEquals("No changes made.", output);
+    	}catch(IOException IOE){
+			System.out.print(IOE);
+		}
+    }
 
+    @Test 
+    public void searchTableContents_1OccuranceOnKeyAndValue(){
+    	List<List<String>> myList =  Arrays.asList(Arrays.asList("1aa=aaa","aaa=aaa"),
+                                                  Arrays.asList("bbb=bbb","bbb=1bb"));
+    	table.setTableContents(myList);
+    	List<String> expected = Arrays.asList("Output: [0,0] - 1 Occurance in Key field\n","Output: [1,1] - 1 Occurance in Value field\n");
+
+    	assertEquals(expected, tis.searchTableContents("1"));
+    }
+
+    @Test
+    public void addTableContent_Successful(){
+    	try{
+    	tis.populateTableContents(2,2);
+
+    	String output = tis.addTableContent(0, "AAA=BBB");
+    	assertEquals("AAA=BBB", output);
+    	}catch(IOException IOE){
+			System.out.print(IOE);
+		}
+
+    }
+    
 	
 }

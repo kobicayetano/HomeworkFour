@@ -27,7 +27,15 @@ public class Table
         return tableContents;
     }
 
-    public void loadTableFromFile(String path) throws FileNotFoundException{
+    public String getTableFileName(){
+        return tableFileName;
+    }
+
+    public void setTableFileName(String tableFileName){
+        this.tableFileName = tableFileName;
+    }
+
+    public boolean loadTableFromFile(String path) throws FileNotFoundException{
         Scanner reader = new Scanner(new File(path));
         List<List<String>> contents = new ArrayList<>();
         List<String> rowInTable;
@@ -42,7 +50,9 @@ public class Table
                 contents.add(rowInTable);
         }
 
+        setTableFileName(path);
         setTableContents(contents);
+        return true;
     }
 
     public boolean saveTableToFile(String path, List<List<String>> table) throws IOException{
@@ -62,7 +72,7 @@ public class Table
             }
             outputWriter.flush();
             outputWriter.close();
-            return true;
+        return true;
     }
 
 
