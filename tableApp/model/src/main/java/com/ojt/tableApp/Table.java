@@ -15,11 +15,9 @@ import org.apache.commons.lang3.StringUtils;
 
 public class Table 
 {   
-    private int row;
-    private int col;
-    private List<List<String>> tableContents;
-    private String tableFileName;
 
+    private static List<List<String>> tableContents;
+    private static String tableFileName = "myFile.txt";
 
     public void setTableContents(List<List<String>> tableContents){
         this.tableContents = tableContents;

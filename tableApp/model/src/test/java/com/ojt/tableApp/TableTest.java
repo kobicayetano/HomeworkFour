@@ -31,6 +31,16 @@ public class TableTest
         assertEquals(mlist, table.getTableContents());
     }
 
+    @Test
+    public void loadATableFromAnExistingFile_Unsuccessful() throws FileNotFoundException{
+        String path = "/Users/MSI/Downloads/file.txt";
+        List<List<String>> mlist =  Arrays.asList(Arrays.asList("Ek=e^z","m!?=W^*"),
+                                                  Arrays.asList("(<d=81S","3xs=^Cb"));
+        table.loadTableFromFile(path);
+        assertNotEquals(mlist, table.getTableContents());
+    }
+
+
     @Test (expected = IOException.class)
     public void saveTableToFile_IOException() throws IOException{
         String path = "";
