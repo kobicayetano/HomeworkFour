@@ -112,6 +112,72 @@ public class TableInteractionServiceTest{
 		}
 
     }
-    
+
+   @Test
+   public void sortTableContent_Ascending(){
+   	try{
+   	ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+      	System.setOut(new PrintStream(outContent));
+
+        List<List<String>> myList =  Arrays.asList(Arrays.asList("aaa=bbb","aaa=aaa"),
+                                                  Arrays.asList("bbb=bbb","bbb=ccc"));
+
+        String expected = "aaa,aaa\taaa,bbb\t\nbbb,bbb\tbbb,ccc\t\n";
+        table.setTableContents(myList);
+
+        tis.sortTableContent("a");
+        myList = table.getTableContents();
+        tis.printTableContents(myList);
+
+        assertEquals(expected, outContent.toString());
+        }catch(IOException IOE){
+			System.out.print(IOE);
+		}
+   }
+
+   @Test
+   public void sortTableContent_Descending(){
+   	try{
+   	ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+      	System.setOut(new PrintStream(outContent));
+
+        List<List<String>> myList =  Arrays.asList(Arrays.asList("aaa=bbb","aaa=aaa"),
+                                                  Arrays.asList("bbb=bbb","bbb=ccc"));
+
+        String expected = "aaa,bbb\taaa,aaa\t\nbbb,ccc\tbbb,bbb\t\n";
+        table.setTableContents(myList);
+
+        tis.sortTableContent("d");
+        myList = table.getTableContents();
+        tis.printTableContents(myList);
+
+        assertEquals(expected, outContent.toString());
+        }catch(IOException IOE){
+			System.out.print(IOE);
+		}
+   }
+
+   @Test
+   public void sortTableContent_Default(){
+   	try{
+   	ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+      	System.setOut(new PrintStream(outContent));
+
+        List<List<String>> myList =  Arrays.asList(Arrays.asList("aaa=bbb","aaa=aaa"),
+                                                  Arrays.asList("bbb=bbb","bbb=ccc"));
+
+        String expected = "No changes made";
+        table.setTableContents(myList);
+
+        tis.sortTableContent("e");
+        myList = table.getTableContents();
+        
+
+        assertEquals(expected, outContent.toString());
+        }catch(IOException IOE){
+			System.out.print(IOE);
+		}
+   }
+       
 	
 }

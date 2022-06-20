@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Random;
 import java.io.IOException;
 import org.apache.commons.lang3.StringUtils;
+import java.util.Collections;
 
 class TableInteractionService{
 	
@@ -127,5 +128,32 @@ class TableInteractionService{
     	return myList.get(row).get(lastIndex);
     }	
 
+
+    public void sortTableContent(String orientation) throws IOException{
+    	List<List<String>> myList = table.getTableContents();
+    	switch(StringUtils.upperCase(orientation)){
+    		case "A":
+    			for (List<String> rowInTable : myList) {
+                        Collections.sort(rowInTable);
+                    }
+                    table.saveTableToFile(table.getTableFileName(), myList);
+                    table.setTableContents(myList);
+                    //System.out.println("Table sorted in ascending order.");
+                    break;
+            case "D":
+            	for (List<String> rowInTable : myList) {
+                        Collections.sort(rowInTable, Collections.reverseOrder());
+                    }
+                    table.saveTableToFile(table.getTableFileName(), myList);
+                    table.setTableContents(myList);
+                    //System.out.println("Table sorted in descending order.");
+                    break;
+            default:
+            	System.out.print("No changes made");
+
+    	}
+    }
+
+    
 
 }
