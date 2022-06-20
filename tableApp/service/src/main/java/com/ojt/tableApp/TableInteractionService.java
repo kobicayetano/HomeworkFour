@@ -2,6 +2,7 @@ package com.ojt.tableApp;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import org.apache.commons.lang3.StringUtils;
 
 class TableInteractionService{
 	
@@ -33,5 +34,15 @@ class TableInteractionService{
         return myList;
 	}
 	
-	
+ 	public void printTableContents(List<List<String>> myList){
+ 		String output = "";
+ 		for (List<String> rowInTable : myList) {
+            for (String data : rowInTable) {
+            	output += StringUtils.replace(data,"=", ",") + "\t";    
+            }
+            output +="\n";
+        }
+        System.out.print(output);
+ 	}
+
 }
