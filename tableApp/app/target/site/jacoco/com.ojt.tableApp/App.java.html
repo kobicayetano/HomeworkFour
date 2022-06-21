@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>App.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">app</a> &gt; <a href="index.source.html" class="el_package">com.ojt.tableApp</a> &gt; <span class="el_source">App.java</span></div><h1>App.java</h1><pre class="source lang-java linenums">package com.ojt.tableApp;
+
+import java.util.InputMismatchException;
+import java.util.Scanner;
+import com.ojt.tableApp.InputUtil;
+import java.io.IOException;
+import java.io.FileNotFoundException;
+import org.apache.commons.lang3.StringUtils;
+import java.util.List;
+import java.util.ArrayList;
+
+
+<span class="nc" id="L13">public class App </span>
+{
+    
+<span class="nc" id="L16">    Table table = new Table();</span>
+<span class="nc" id="L17">    TableInteractionService tic = new TableInteractionService();</span>
+    
+
+    public void initialPrompt(){
+<span class="nc" id="L21">        Scanner scanner = new Scanner(System.in);</span>
+<span class="nc" id="L22">        boolean tableLoaded = false;</span>
+        try{
+<span class="nc" id="L24">           System.out.print(&quot;Enter file path to load: &quot;);</span>
+<span class="nc" id="L25">           String path = scanner.next(); </span>
+<span class="nc" id="L26">           tableLoaded = table.loadTableFromFile(path);</span>
+
+<span class="nc" id="L28">       }catch(FileNotFoundException FNFE){</span>
+<span class="nc" id="L29">            System.out.println(&quot;Error: &quot; + FNFE);</span>
+<span class="nc" id="L30">            tableLoaded = false;</span>
+
+<span class="nc" id="L32">       } </span>
+
+<span class="nc bnc" id="L34" title="All 2 branches missed.">       if(!tableLoaded){</span>
+<span class="nc" id="L35">        initializeTable();</span>
+       }
+<span class="nc" id="L37">    }</span>
+
+
+    public void callAddTableContent(){
+<span class="nc" id="L41">        Scanner scanner = new Scanner(System.in);</span>
+        try{
+<span class="nc" id="L43">        System.out.print(&quot;Row index: &quot; );</span>
+<span class="nc" id="L44">        int row = scanner.nextInt();</span>
+<span class="nc" id="L45">        InputUtil.checkForLessThanZeroInput(row);</span>
+<span class="nc" id="L46">        System.out.print(&quot;New key: &quot; );</span>
+<span class="nc" id="L47">        String key = scanner.next();</span>
+<span class="nc" id="L48">        System.out.print(&quot;New Value: &quot; );</span>
+<span class="nc" id="L49">        String value = scanner.next();</span>
+<span class="nc" id="L50">        String keyAndValue = key+&quot;=&quot;+value;</span>
+<span class="nc" id="L51">        tic.addTableContent(row, keyAndValue);</span>
+<span class="nc" id="L52">        }catch(InputMismatchException IME){</span>
+<span class="nc" id="L53">            System.out.println(&quot;Check input.&quot;);</span>
+<span class="nc" id="L54">        }catch(IOException IOE){</span>
+<span class="nc" id="L55">            System.out.println(&quot;Error: &quot;+ IOE);</span>
+<span class="nc" id="L56">        }catch(IllegalArgumentException IAE){</span>
+<span class="nc" id="L57">            System.out.println(&quot;Error: &quot;+ IAE);</span>
+<span class="nc" id="L58">            initializeTable();</span>
+<span class="nc" id="L59">        }</span>
+<span class="nc" id="L60">    }</span>
+
+    public void callSortTableContent(){
+<span class="nc" id="L63">        Scanner scanner = new Scanner(System.in);</span>
+        try{
+<span class="nc" id="L65">        System.out.print(&quot;A - Ascending / D - Descending: &quot;);</span>
+<span class="nc" id="L66">        String orientation = scanner.next();</span>
+<span class="nc" id="L67">        tic.sortTableContent(orientation);</span>
+<span class="nc" id="L68">        }catch(IOException IOE){</span>
+<span class="nc" id="L69">            System.out.println(&quot;Error: &quot;+ IOE);</span>
+<span class="nc" id="L70">        }</span>
+<span class="nc" id="L71">    }</span>
+
+    public void callSearchTableContent(){
+<span class="nc" id="L74">        Scanner scanner = new Scanner(System.in);</span>
+<span class="nc" id="L75">        System.out.print(&quot;Search for: &quot;);</span>
+<span class="nc" id="L76">        String searchToken = scanner.next();</span>
+<span class="nc" id="L77">        List&lt;String&gt; output = tic.searchTableContents(searchToken);</span>
+<span class="nc bnc" id="L78" title="All 2 branches missed.">        for(String s : output){</span>
+<span class="nc" id="L79">            System.out.println(s);</span>
+<span class="nc" id="L80">        }</span>
+<span class="nc" id="L81">    }</span>
+
+    public void callEditTableContent(){
+<span class="nc" id="L84">        Scanner scanner = new Scanner(System.in);</span>
+        try{
+            int row;
+            int col;
+            String keyOrValue;
+            String newValue;
+<span class="nc" id="L90">            System.out.print(&quot;Row index: &quot; );</span>
+<span class="nc" id="L91">            row = scanner.nextInt();</span>
+<span class="nc" id="L92">            System.out.print(&quot;Column index: &quot; );</span>
+<span class="nc" id="L93">            col = scanner.nextInt();          </span>
+<span class="nc" id="L94">            InputUtil.checkForLessThanZeroInput(row);</span>
+<span class="nc" id="L95">            InputUtil.checkForLessThanZeroInput(col);</span>
+<span class="nc" id="L96">            System.out.print(&quot;Key or Value: &quot; );</span>
+<span class="nc" id="L97">            keyOrValue = StringUtils.upperCase(scanner.next());</span>
+<span class="nc" id="L98">            System.out.print(&quot;New value: &quot; );</span>
+<span class="nc" id="L99">            newValue = StringUtils.upperCase(scanner.next());</span>
+<span class="nc" id="L100">            tic.editTableContent(row, col, keyOrValue, newValue);</span>
+<span class="nc" id="L101">        }catch(InputMismatchException IME){</span>
+<span class="nc" id="L102">            System.out.println(&quot;Invalid input.&quot;);</span>
+<span class="nc" id="L103">        }catch(IOException IOE){</span>
+<span class="nc" id="L104">            System.out.println(&quot;Error:&quot; + IOE);</span>
+<span class="nc" id="L105">        }catch(IndexOutOfBoundsException IOBE){</span>
+<span class="nc" id="L106">            System.out.println(&quot;Error:&quot; + IOBE);</span>
+        }
+<span class="nc" id="L108">        catch(IllegalArgumentException IAE){</span>
+<span class="nc" id="L109">            System.out.println(&quot;Error:&quot; + IAE);</span>
+<span class="nc" id="L110">        }</span>
+<span class="nc" id="L111">    }</span>
+
+
+    public void initializeTable(){
+<span class="nc" id="L115">        Scanner scanner = new Scanner(System.in);</span>
+        int row;
+        int col;
+        try{
+<span class="nc" id="L119">        System.out.print(&quot;Row size:&quot;);</span>
+<span class="nc" id="L120">        row = scanner.nextInt();</span>
+<span class="nc" id="L121">        System.out.print(&quot;Column size:&quot;);</span>
+<span class="nc" id="L122">        col = scanner.nextInt();</span>
+<span class="nc" id="L123">        InputUtil.checkForZeroInput(row);</span>
+<span class="nc" id="L124">        InputUtil.checkForLessThanZeroInput(row);</span>
+<span class="nc" id="L125">        InputUtil.checkForZeroInput(col);</span>
+<span class="nc" id="L126">        InputUtil.checkForLessThanZeroInput(col);</span>
+<span class="nc" id="L127">        tic.printTableContents(tic.populateTableContents(row,col));</span>
+<span class="nc" id="L128">        }catch(InputMismatchException IME){</span>
+<span class="nc" id="L129">            System.out.println(&quot;Error: &quot;+ IME);</span>
+<span class="nc" id="L130">            initializeTable();</span>
+<span class="nc" id="L131">        }catch(IOException IOE){</span>
+<span class="nc" id="L132">            initializeTable();</span>
+<span class="nc" id="L133">        }catch(IllegalArgumentException IAE){</span>
+<span class="nc" id="L134">            System.out.println(&quot;Error: &quot;+ IAE);</span>
+<span class="nc" id="L135">            initializeTable();</span>
+<span class="nc" id="L136">        }</span>
+<span class="nc" id="L137">    }</span>
+
+    public void callPrintTableContent(){
+<span class="nc" id="L140">        tic.printTableContents(table.getTableContents());</span>
+<span class="nc" id="L141">    }</span>
+
+    public static void main(String[] args){   
+<span class="nc" id="L144">        Scanner inputScanner = new Scanner(System.in);</span>
+<span class="nc" id="L145">        App app = new App();</span>
+<span class="nc" id="L146">        app.initialPrompt();</span>
+        String action;
+        while(true){
+<span class="nc" id="L149">            System.out.println(&quot;\n&quot;);</span>
+<span class="nc" id="L150">            System.out.println(&quot;===================\n&quot;);</span>
+<span class="nc" id="L151">            System.out.println(&quot;a.) New Table&quot;);</span>
+<span class="nc" id="L152">            System.out.println(&quot;b.) Edit Table&quot;);</span>
+<span class="nc" id="L153">            System.out.println(&quot;c.) Search Table&quot;);</span>
+<span class="nc" id="L154">            System.out.println(&quot;d.) Print Table&quot;);</span>
+<span class="nc" id="L155">            System.out.println(&quot;e.) Sort Table&quot;);</span>
+<span class="nc" id="L156">            System.out.println(&quot;f.) Add Column&quot;);</span>
+<span class="nc" id="L157">            System.out.println(&quot;g.) Exit\n&quot;);</span>
+<span class="nc" id="L158">            System.out.print(&quot;Input: &quot;);</span>
+
+<span class="nc" id="L160">            action = StringUtils.upperCase(inputScanner.next());</span>
+<span class="nc bnc" id="L161" title="All 8 branches missed.">            switch(action){</span>
+                case&quot;A&quot;:
+<span class="nc" id="L163">                    app.initializeTable(); </span>
+<span class="nc" id="L164">                    break;</span>
+                case&quot;B&quot;:
+<span class="nc" id="L166">                    app.callEditTableContent();</span>
+<span class="nc" id="L167">                    break;</span>
+                case&quot;C&quot;:
+<span class="nc" id="L169">                    app.callSearchTableContent();</span>
+<span class="nc" id="L170">                    break;</span>
+                case&quot;D&quot;:
+<span class="nc" id="L172">                    app.callPrintTableContent();</span>
+<span class="nc" id="L173">                    break;</span>
+                case&quot;E&quot;:
+<span class="nc" id="L175">                    app.callSortTableContent();</span>
+<span class="nc" id="L176">                    break;</span>
+                case&quot;F&quot;:
+<span class="nc" id="L178">                    app.callAddTableContent();</span>
+<span class="nc" id="L179">                    break;</span>
+                case&quot;G&quot;:
+<span class="nc" id="L181">                    System.out.println(&quot;Process terminated.&quot;);</span>
+<span class="nc" id="L182">                    System.exit(0);</span>
+                default:
+<span class="nc" id="L184">                    System.out.println(&quot;Invalid choice&quot;);    </span>
+            }
+        } 
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

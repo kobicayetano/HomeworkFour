@@ -16,7 +16,6 @@ public class App
     Table table = new Table();
     TableInteractionService tic = new TableInteractionService();
     
-
     public void initialPrompt(){
         Scanner scanner = new Scanner(System.in);
         boolean tableLoaded = false;
@@ -26,19 +25,17 @@ public class App
            tableLoaded = table.loadTableFromFile(path);
 
        }catch(FileNotFoundException FNFE){
+            System.out.println("Error: " + FNFE);
             tableLoaded = false;
        } 
-
        if(!tableLoaded){
         initializeTable();
        }
     }
 
-
     public void callAddTableContent(){
         Scanner scanner = new Scanner(System.in);
         try{
-        System.out.print("Enter which row to add column, key, value: ");
         System.out.print("Row index: " );
         int row = scanner.nextInt();
         InputUtil.checkForLessThanZeroInput(row);
@@ -49,9 +46,12 @@ public class App
         String keyAndValue = key+"="+value;
         tic.addTableContent(row, keyAndValue);
         }catch(InputMismatchException IME){
-            System.out.print("Check input.");
+            System.out.println("Check input.");
         }catch(IOException IOE){
-            System.out.print("Error: "+ IOE);
+            System.out.println("Error: "+ IOE);
+        }catch(IllegalArgumentException IAE){
+            System.out.println("Error: "+ IAE);
+            initializeTable();
         }
     }
 
@@ -62,7 +62,7 @@ public class App
         String orientation = scanner.next();
         tic.sortTableContent(orientation);
         }catch(IOException IOE){
-            System.out.print("Error: "+ IOE);
+            System.out.println("Error: "+ IOE);
         }
     }
 
@@ -83,8 +83,6 @@ public class App
             int col;
             String keyOrValue;
             String newValue;
-            System.out.print("Enter row, column, Key or Value, new value: ");
-            //add checks for zeroInput and lessThanZeroInput
             System.out.print("Row index: " );
             row = scanner.nextInt();
             System.out.print("Column index: " );
@@ -97,14 +95,16 @@ public class App
             newValue = StringUtils.upperCase(scanner.next());
             tic.editTableContent(row, col, keyOrValue, newValue);
         }catch(InputMismatchException IME){
-            System.out.print("Invalid input.");
+            System.out.println("Invalid input.");
         }catch(IOException IOE){
-            System.out.print("Error:" + IOE);
+            System.out.println("Error:" + IOE);
         }catch(IndexOutOfBoundsException IOBE){
-            System.out.print("Error:" + IOBE);
+            System.out.println("Error:" + IOBE);
+        }
+        catch(IllegalArgumentException IAE){
+            System.out.println("Error:" + IAE);
         }
     }
-
 
     public void initializeTable(){
         Scanner scanner = new Scanner(System.in);
@@ -121,7 +121,7 @@ public class App
         InputUtil.checkForLessThanZeroInput(col);
         tic.printTableContents(tic.populateTableContents(row,col));
         }catch(InputMismatchException IME){
-            System.out.print("Error: "+ IME);
+            System.out.println("Error: "+ IME);
             initializeTable();
         }catch(IOException IOE){
             initializeTable();
@@ -176,7 +176,7 @@ public class App
                     System.out.println("Process terminated.");
                     System.exit(0);
                 default:
-                    System.out.print("Invalid choice");    
+                    System.out.println("Invalid choice");    
             }
         } 
     }
