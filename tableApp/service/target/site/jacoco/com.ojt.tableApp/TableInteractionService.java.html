@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>TableInteractionService.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">service</a> &gt; <a href="index.source.html" class="el_package">com.ojt.tableApp</a> &gt; <span class="el_source">TableInteractionService.java</span></div><h1>TableInteractionService.java</h1><pre class="source lang-java linenums">package com.ojt.tableApp;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+import java.io.IOException;
+import org.apache.commons.lang3.StringUtils;
+import java.util.Collections;
+
+<span class="fc" id="L9">class TableInteractionService{</span>
+	
+<span class="fc" id="L11">	Table table = new Table();</span>
+
+
+	public List&lt;List&lt;String&gt;&gt; populateTableContents(int row, int col) throws IOException{
+<span class="fc" id="L15">		List&lt;List&lt;String&gt;&gt; myList = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L16">		String generatedKey = &quot;&quot;;</span>
+<span class="fc" id="L17">        String generatedValue = &quot;&quot;;</span>
+<span class="fc" id="L18">        final String characterPool = &quot;ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&amp;*()_+?/.&gt;&lt;[]&quot;;</span>
+<span class="fc" id="L19">        Random random = new Random();</span>
+
+<span class="fc bfc" id="L21" title="All 2 branches covered.">        for (int i = 0; i &lt; row; i++) {</span>
+<span class="fc" id="L22">            ArrayList&lt;String&gt; rowInTable = new ArrayList&lt;&gt;();</span>
+<span class="fc bfc" id="L23" title="All 2 branches covered.">            for (int j = 0; j &lt; col; j++) {</span>
+<span class="fc bfc" id="L24" title="All 2 branches covered.">                for (int k = 0; k &lt; 3; k++) {</span>
+<span class="fc" id="L25">                    generatedKey += characterPool.charAt(random.nextInt(characterPool.length()));</span>
+<span class="fc" id="L26">                    generatedValue += characterPool.charAt(random.nextInt(characterPool.length()));</span>
+                }
+<span class="fc" id="L28">                rowInTable.add(generatedKey + &quot;=&quot; + generatedValue);</span>
+<span class="fc" id="L29">                generatedKey = &quot;&quot;;</span>
+<span class="fc" id="L30">                generatedValue = &quot;&quot;;</span>
+            }
+<span class="fc" id="L32">            myList.add(rowInTable);</span>
+        }
+
+<span class="fc" id="L35">        table.setTableContents(myList);</span>
+<span class="fc" id="L36">        table.saveTableToFile(table.getTableFileName(), myList);</span>
+<span class="fc" id="L37">        return myList;</span>
+	}
+	
+ 	public void printTableContents(List&lt;List&lt;String&gt;&gt; myList){
+<span class="fc" id="L41"> 		String output = &quot;&quot;;</span>
+<span class="fc bfc" id="L42" title="All 2 branches covered."> 		for (List&lt;String&gt; rowInTable : myList) {</span>
+<span class="fc bfc" id="L43" title="All 2 branches covered.">            for (String data : rowInTable) {</span>
+<span class="fc" id="L44">            	output += StringUtils.replace(data,&quot;=&quot;, &quot;,&quot;) + &quot;\t&quot;;    </span>
+<span class="fc" id="L45">            }</span>
+<span class="fc" id="L46">            output +=&quot;\n&quot;;</span>
+<span class="fc" id="L47">        }</span>
+<span class="fc" id="L48">        System.out.print(output);</span>
+<span class="fc" id="L49"> 	}</span>
+
+ 	public String editTableContent(int row, int col, String keyOrValue, String newValue) throws IOException, IndexOutOfBoundsException{
+<span class="fc" id="L52">        List&lt;List&lt;String&gt;&gt; myList = table.getTableContents();</span>
+        String[] indexData;
+<span class="fc" id="L54">        indexData = StringUtils.split(myList.get(row).get(col), &quot;=&quot;);</span>
+        String returnValue;
+<span class="fc bfc" id="L56" title="All 2 branches covered.">        if(StringUtils.equals(&quot;KEY&quot;, keyOrValue)){</span>
+<span class="fc" id="L57">            indexData[0] = newValue;</span>
+<span class="fc" id="L58">            myList.get(row).set(col, indexData[0] + &quot;=&quot; + indexData[1]);</span>
+<span class="fc" id="L59">            table.setTableContents(myList);</span>
+<span class="fc" id="L60">            returnValue = table.getTableContents().get(row).get(col);</span>
+<span class="fc bfc" id="L61" title="All 2 branches covered.">        }else if(StringUtils.equals(&quot;VALUE&quot;, keyOrValue)){</span>
+<span class="fc" id="L62">            indexData[1] = newValue;</span>
+<span class="fc" id="L63">            myList.get(row).set(col, indexData[0] + &quot;=&quot; + indexData[1]);</span>
+<span class="fc" id="L64">            table.setTableContents(myList);</span>
+<span class="fc" id="L65">            returnValue = table.getTableContents().get(row).get(col);</span>
+        }else{
+<span class="fc" id="L67">            return &quot;No changes made.&quot;;</span>
+        }
+
+<span class="fc" id="L70">        table.saveTableToFile(table.getTableFileName(), myList);</span>
+<span class="fc" id="L71">        return returnValue;</span>
+    }
+
+    public List&lt;String&gt; searchTableContents(String searchToken){
+<span class="fc" id="L75">        List&lt;List&lt;String&gt;&gt; myList = table.getTableContents();</span>
+<span class="fc" id="L76">        List&lt;String&gt; output = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L77">        int tableRow = myList.size();</span>
+        int tableColumn;
+        int occuranceInKey;
+        int fromIndexOfKey;
+        int occuranceInValue;
+        int fromIndexOfValue;
+
+<span class="fc bfc" id="L84" title="All 2 branches covered.">        for (int i = 0; i &lt; tableRow; i++) {</span>
+<span class="fc" id="L85">            tableColumn = myList.get(i).size();</span>
+<span class="fc bfc" id="L86" title="All 2 branches covered.">            for (int j = 0; j &lt; tableColumn; j++) {</span>
+
+<span class="fc" id="L88">                String currentData = myList.get(i).get(j);</span>
+<span class="fc" id="L89">                String[] stringToSearch = StringUtils.split(currentData,&quot;=&quot;);//result.split(&quot;=&quot;);</span>
+<span class="fc" id="L90">                occuranceInKey = 0;</span>
+<span class="fc" id="L91">                fromIndexOfKey = 0;</span>
+<span class="fc" id="L92">                occuranceInValue = 0;</span>
+<span class="fc" id="L93">                fromIndexOfValue = 0;</span>
+                //return -1 if value cannot  be found (Loop stop mechanism)
+                //search in KEY
+<span class="fc bfc" id="L96" title="All 2 branches covered.">                while ((fromIndexOfKey = StringUtils.indexOf(stringToSearch[0],searchToken, fromIndexOfKey)) != -1) {</span>
+<span class="fc" id="L97">                    occuranceInKey++;</span>
+<span class="fc" id="L98">                    fromIndexOfKey++;</span>
+                }
+<span class="fc bfc" id="L100" title="All 2 branches covered.">                if (occuranceInKey &gt; 0) {</span>
+<span class="fc" id="L101">                   output.add(String.format(&quot;Output: [%d,%d] - %d Occurance in Key field\n&quot;, i, j, occuranceInKey));</span>
+                }
+                //return -1 if value cannot  be found (Loop stop mechanism)
+                //search in VALUE
+<span class="fc bfc" id="L105" title="All 2 branches covered.">                while ((fromIndexOfValue = StringUtils.indexOf(stringToSearch[1],searchToken, fromIndexOfValue)) != -1) {</span>
+<span class="fc" id="L106">                    occuranceInValue++;</span>
+<span class="fc" id="L107">                    fromIndexOfValue++;</span>
+                }
+<span class="fc bfc" id="L109" title="All 2 branches covered.">                if (occuranceInValue &gt; 0) {</span>
+<span class="fc" id="L110">                    output.add(String.format(&quot;Output: [%d,%d] - %d Occurance in Value field\n&quot;, i, j, occuranceInValue));</span>
+                }
+            }
+        }
+<span class="fc" id="L114">        return output;</span>
+    }
+
+    public String addTableContent(int row, String keyAndValue) throws IOException, IndexOutOfBoundsException{
+    	
+<span class="fc" id="L119">    	List&lt;List&lt;String&gt;&gt; myList = table.getTableContents();</span>
+<span class="fc" id="L120">    	myList.get(row).add(keyAndValue);</span>
+<span class="fc" id="L121">    	int lastIndex = myList.get(row).size()-1;</span>
+<span class="fc" id="L122">    	table.setTableContents(myList);</span>
+<span class="fc" id="L123">    	table.saveTableToFile(table.getTableFileName(), myList);</span>
+
+<span class="fc" id="L125">    	return myList.get(row).get(lastIndex);</span>
+    }	
+
+
+    public void sortTableContent(String orientation) throws IOException{
+<span class="fc" id="L130">    	List&lt;List&lt;String&gt;&gt; myList = table.getTableContents();</span>
+<span class="fc bfc" id="L131" title="All 3 branches covered.">    	switch(StringUtils.upperCase(orientation)){</span>
+    		case &quot;A&quot;:
+<span class="fc bfc" id="L133" title="All 2 branches covered.">    			for (List&lt;String&gt; rowInTable : myList) {</span>
+<span class="fc" id="L134">                        Collections.sort(rowInTable);</span>
+<span class="fc" id="L135">                    }</span>
+<span class="fc" id="L136">                    table.saveTableToFile(table.getTableFileName(), myList);</span>
+<span class="fc" id="L137">                    table.setTableContents(myList);</span>
+<span class="fc" id="L138">                    break;</span>
+            case &quot;D&quot;:
+<span class="fc bfc" id="L140" title="All 2 branches covered.">            	for (List&lt;String&gt; rowInTable : myList) {</span>
+<span class="fc" id="L141">                        Collections.sort(rowInTable, Collections.reverseOrder());</span>
+<span class="fc" id="L142">                    }</span>
+<span class="fc" id="L143">                    table.saveTableToFile(table.getTableFileName(), myList);</span>
+<span class="fc" id="L144">                    table.setTableContents(myList);                   </span>
+<span class="fc" id="L145">                    break;</span>
+            default:
+<span class="fc" id="L147">            	System.out.print(&quot;No changes made&quot;);</span>
+
+    	}
+<span class="fc" id="L150">    }</span>
+
+    
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

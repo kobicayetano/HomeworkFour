@@ -75,7 +75,7 @@ public class TableInteractionServiceTest{
     	List<List<String>> myList =  Arrays.asList(Arrays.asList("aaa=aaa","aaa=aaa"),
                                                   Arrays.asList("bbb=bbb","bbb=bbb"));
     	table.setTableContents(myList);
-    	String output = tis.editTableContent(0,0,"KEY","111");
+    	String output = tis.editTableContent(0,0,"VALUE","111");
     	assertEquals(table.getTableContents().get(0).get(0), output);
     	}catch(IOException IOE){
 			System.out.print(IOE);
