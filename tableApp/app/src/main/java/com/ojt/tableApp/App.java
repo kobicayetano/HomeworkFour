@@ -2,6 +2,7 @@ package com.ojt.tableApp;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
+import com.ojt.tableApp.InputUtil;
 import java.io.IOException;
 import java.io.FileNotFoundException;
 import org.apache.commons.lang3.StringUtils;
@@ -38,8 +39,12 @@ public class App
         Scanner scanner = new Scanner(System.in);
         try{
         System.out.print("Enter which row to add column, key, value: ");
+        System.out.print("Row index: " );
         int row = scanner.nextInt();
+        InputUtil.checkForLessThanZeroInput(row);
+        System.out.print("New key: " );
         String key = scanner.next();
+        System.out.print("New Value: " );
         String value = scanner.next();
         String keyAndValue = key+"="+value;
         tic.addTableContent(row, keyAndValue);
@@ -53,7 +58,7 @@ public class App
     public void callSortTableContent(){
         Scanner scanner = new Scanner(System.in);
         try{
-        System.out.print("A - Ascending / D - Descending : ");
+        System.out.print("A - Ascending / D - Descending: ");
         String orientation = scanner.next();
         tic.sortTableContent(orientation);
         }catch(IOException IOE){
@@ -80,9 +85,15 @@ public class App
             String newValue;
             System.out.print("Enter row, column, Key or Value, new value: ");
             //add checks for zeroInput and lessThanZeroInput
+            System.out.print("Row index: " );
             row = scanner.nextInt();
-            col = scanner.nextInt();
+            System.out.print("Column index: " );
+            col = scanner.nextInt();          
+            InputUtil.checkForLessThanZeroInput(row);
+            InputUtil.checkForLessThanZeroInput(col);
+            System.out.print("Key or Value: " );
             keyOrValue = StringUtils.upperCase(scanner.next());
+            System.out.print("New value: " );
             newValue = StringUtils.upperCase(scanner.next());
             tic.editTableContent(row, col, keyOrValue, newValue);
         }catch(InputMismatchException IME){
@@ -100,17 +111,22 @@ public class App
         int row;
         int col;
         try{
-        System.out.print("Input row and column size: aaa");
+        System.out.print("Row size:");
         row = scanner.nextInt();
+        System.out.print("Column size:");
         col = scanner.nextInt();
-        //add checks for zeroInput and lessThanZeroInput
+        InputUtil.checkForZeroInput(row);
+        InputUtil.checkForLessThanZeroInput(row);
+        InputUtil.checkForZeroInput(col);
+        InputUtil.checkForLessThanZeroInput(col);
         tic.printTableContents(tic.populateTableContents(row,col));
         }catch(InputMismatchException IME){
             System.out.print("Error: "+ IME);
-            row=0;
-            col=0;
             initializeTable();
         }catch(IOException IOE){
+            initializeTable();
+        }catch(IllegalArgumentException IAE){
+            System.out.println("Error: "+ IAE);
             initializeTable();
         }
     }
