@@ -51,7 +51,6 @@ public class App
             System.out.println("Error: "+ IOE);
         }catch(IllegalArgumentException IAE){
             System.out.println("Error: "+ IAE);
-            initializeTable();
         }
     }
 
@@ -92,7 +91,7 @@ public class App
             System.out.print("Key or Value: " );
             keyOrValue = StringUtils.upperCase(scanner.next());
             System.out.print("New value: " );
-            newValue = StringUtils.upperCase(scanner.next());
+            newValue = scanner.next();
             tic.editTableContent(row, col, keyOrValue, newValue);
         }catch(InputMismatchException IME){
             System.out.println("Invalid input.");

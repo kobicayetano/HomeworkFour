@@ -15,7 +15,7 @@ public class InputUtil
 
     public static void checkForLessThanZeroInput( int number )
     {
-        if(number==0){
+        if(number<0){
             throw new IllegalArgumentException("Invalid input.");
         }
     }

@@ -19,6 +19,6 @@ public class InputUtilTest
     @Test (expected = IllegalArgumentException.class)
     public void lessThanZeroInputThrowsException() throws IllegalArgumentException
     {
-        InputUtil.checkForLessThanZeroInput(0);
+        InputUtil.checkForLessThanZeroInput(-1);
     }
 }
