@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="com.ojt.tableApp.TableTest" time="0.07" tests="5" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="com.ojt.tableApp.TableTest" time="0.153" tests="5" errors="0" skipped="0" failures="0">
   <properties>
     <property name="sun.desktop" value="windows"/>
     <property name="awt.toolkit" value="sun.awt.windows.WToolkit"/>
@@ -17,7 +17,7 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="user.country" value="PH"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk-11.0.13\bin"/>
-    <property name="sun.java.command" value="C:\Users\MSI\AppData\Local\Temp\surefire4230624092352510836\surefirebooter13802389951083628823.jar C:\Users\MSI\AppData\Local\Temp\surefire4230624092352510836 2022-07-15T10-45-53_653-jvmRun1 surefire5727862107436101843tmp surefire_011250196266516403716tmp"/>
+    <property name="sun.java.command" value="C:\Users\MSI\AppData\Local\Temp\surefire10551060587385232483\surefirebooter16448300972485176402.jar C:\Users\MSI\AppData\Local\Temp\surefire10551060587385232483 2022-07-19T14-32-23_326-jvmRun1 surefire5986888770520511294tmp surefire_011769216244734443804tmp"/>
     <property name="jdk.debug" value="release"/>
     <property name="surefire.test.class.path" value="C:\Users\MSI\Desktop\FOR OJT\HomeworkFour\tableApp\model\target\test-classes;C:\Users\MSI\Desktop\FOR OJT\HomeworkFour\tableApp\model\target\classes;C:\Users\MSI\.m2\repository\junit\junit\4.11\junit-4.11.jar;C:\Users\MSI\.m2\repository\org\hamcrest\hamcrest-core\1.3\hamcrest-core-1.3.jar;C:\Users\MSI\.m2\repository\org\apache\commons\commons-lang3\3.12.0\commons-lang3-3.12.0.jar;"/>
     <property name="sun.cpu.endian" value="little"/>
@@ -33,7 +33,7 @@
     <property name="java.specification.name" value="Java Platform API Specification"/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.awt.graphicsenv" value="sun.awt.Win32GraphicsEnvironment"/>
-    <property name="surefire.real.class.path" value="C:\Users\MSI\AppData\Local\Temp\surefire4230624092352510836\surefirebooter13802389951083628823.jar"/>
+    <property name="surefire.real.class.path" value="C:\Users\MSI\AppData\Local\Temp\surefire10551060587385232483\surefirebooter16448300972485176402.jar"/>
     <property name="user.script" value=""/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="java.runtime.version" value="11.0.13+10-LTS-370"/>
@@ -60,9 +60,9 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="55.0"/>
   </properties>
-  <testcase name="loadATableFromAnExistingFile_Unsuccessful" classname="com.ojt.tableApp.TableTest" time="0.005"/>
-  <testcase name="loadATableFromAnExistingFile_FileNotFoundException" classname="com.ojt.tableApp.TableTest" time="0"/>
+  <testcase name="loadATableFromAnExistingFile_Unsuccessful" classname="com.ojt.tableApp.TableTest" time="0.012"/>
+  <testcase name="loadATableFromAnExistingFile_FileNotFoundException" classname="com.ojt.tableApp.TableTest" time="0.007"/>
   <testcase name="saveTableToFile_IOException" classname="com.ojt.tableApp.TableTest" time="0"/>
-  <testcase name="loadATableFromAnExistingFile_Successful" classname="com.ojt.tableApp.TableTest" time="0"/>
-  <testcase name="saveTableToFile_Successful" classname="com.ojt.tableApp.TableTest" time="0.002"/>
+  <testcase name="loadATableFromAnExistingFile_Successful" classname="com.ojt.tableApp.TableTest" time="0.001"/>
+  <testcase name="saveTableToFile_Successful" classname="com.ojt.tableApp.TableTest" time="0"/>
 </testsuite>

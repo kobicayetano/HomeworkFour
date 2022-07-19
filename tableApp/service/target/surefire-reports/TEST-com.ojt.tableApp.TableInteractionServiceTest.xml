@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="com.ojt.tableApp.TableInteractionServiceTest" time="0.204" tests="13" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="com.ojt.tableApp.TableInteractionServiceTest" time="0.187" tests="13" errors="0" skipped="0" failures="0">
   <properties>
     <property name="sun.desktop" value="windows"/>
     <property name="awt.toolkit" value="sun.awt.windows.WToolkit"/>
@@ -17,7 +17,7 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="user.country" value="PH"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk-11.0.13\bin"/>
-    <property name="sun.java.command" value="C:\Users\MSI\AppData\Local\Temp\surefire10203804644317603397\surefirebooter2730874604265315968.jar C:\Users\MSI\AppData\Local\Temp\surefire10203804644317603397 2022-07-15T10-45-53_653-jvmRun1 surefire1565245535395162171tmp surefire_11226349464454180336tmp"/>
+    <property name="sun.java.command" value="C:\Users\MSI\AppData\Local\Temp\surefire17673042281435180013\surefirebooter12561604329921389424.jar C:\Users\MSI\AppData\Local\Temp\surefire17673042281435180013 2022-07-19T14-32-23_326-jvmRun1 surefire5487974357876537292tmp surefire_12294543190565891350tmp"/>
     <property name="jdk.debug" value="release"/>
     <property name="surefire.test.class.path" value="C:\Users\MSI\Desktop\FOR OJT\HomeworkFour\tableApp\service\target\test-classes;C:\Users\MSI\Desktop\FOR OJT\HomeworkFour\tableApp\service\target\classes;C:\Users\MSI\.m2\repository\junit\junit\4.11\junit-4.11.jar;C:\Users\MSI\.m2\repository\org\hamcrest\hamcrest-core\1.3\hamcrest-core-1.3.jar;C:\Users\MSI\Desktop\FOR OJT\HomeworkFour\tableApp\model\target\model-1.0-SNAPSHOT.jar;C:\Users\MSI\.m2\repository\org\apache\commons\commons-lang3\3.12.0\commons-lang3-3.12.0.jar;"/>
     <property name="sun.cpu.endian" value="little"/>
@@ -33,7 +33,7 @@
     <property name="java.specification.name" value="Java Platform API Specification"/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.awt.graphicsenv" value="sun.awt.Win32GraphicsEnvironment"/>
-    <property name="surefire.real.class.path" value="C:\Users\MSI\AppData\Local\Temp\surefire10203804644317603397\surefirebooter2730874604265315968.jar"/>
+    <property name="surefire.real.class.path" value="C:\Users\MSI\AppData\Local\Temp\surefire17673042281435180013\surefirebooter12561604329921389424.jar"/>
     <property name="user.script" value=""/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="java.runtime.version" value="11.0.13+10-LTS-370"/>
@@ -60,17 +60,17 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="55.0"/>
   </properties>
-  <testcase name="editTableContent_EditValue" classname="com.ojt.tableApp.TableInteractionServiceTest" time="0.061"/>
+  <testcase name="editTableContent_EditValue" classname="com.ojt.tableApp.TableInteractionServiceTest" time="0.056"/>
   <testcase name="sortTableContent_Ascending" classname="com.ojt.tableApp.TableInteractionServiceTest" time="0.005"/>
   <testcase name="editTableContent_OutOfBounds" classname="com.ojt.tableApp.TableInteractionServiceTest" time="0.001"/>
   <testcase name="sortTableContent_Default" classname="com.ojt.tableApp.TableInteractionServiceTest" time="0"/>
   <testcase name="addTable_OutOfBounds" classname="com.ojt.tableApp.TableInteractionServiceTest" time="0.001"/>
   <testcase name="editTableContent_NotKeyOrValue" classname="com.ojt.tableApp.TableInteractionServiceTest" time="0"/>
-  <testcase name="printTableContents_ShouldHaveSameOutput" classname="com.ojt.tableApp.TableInteractionServiceTest" time="0.001"/>
+  <testcase name="printTableContents_ShouldHaveSameOutput" classname="com.ojt.tableApp.TableInteractionServiceTest" time="0"/>
   <testcase name="populateTableContents_ShouldHaveSize4And5" classname="com.ojt.tableApp.TableInteractionServiceTest" time="0.001"/>
   <testcase name="populateTableContents_ShouldHaveSameValue" classname="com.ojt.tableApp.TableInteractionServiceTest" time="0.001"/>
-  <testcase name="sortTableContent_Descending" classname="com.ojt.tableApp.TableInteractionServiceTest" time="0.001"/>
-  <testcase name="editTableContent_EditKey" classname="com.ojt.tableApp.TableInteractionServiceTest" time="0.002"/>
-  <testcase name="addTableContent_Successful" classname="com.ojt.tableApp.TableInteractionServiceTest" time="0.002"/>
+  <testcase name="sortTableContent_Descending" classname="com.ojt.tableApp.TableInteractionServiceTest" time="0.003"/>
+  <testcase name="editTableContent_EditKey" classname="com.ojt.tableApp.TableInteractionServiceTest" time="0.001"/>
+  <testcase name="addTableContent_Successful" classname="com.ojt.tableApp.TableInteractionServiceTest" time="0.001"/>
   <testcase name="searchTableContents_1OccuranceOnKeyAndValue" classname="com.ojt.tableApp.TableInteractionServiceTest" time="0.001"/>
 </testsuite>
